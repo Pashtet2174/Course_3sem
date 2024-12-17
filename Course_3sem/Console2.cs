@@ -9,7 +9,9 @@ public class Console2
         Console.WriteLine("2. Добавить кинотеатр");
         Console.WriteLine("3. Добавить поставщика");
         Console.WriteLine("4. Создать аренду");
-        Console.WriteLine("5. Выйти");
+        Console.WriteLine("5. Показать все фильмы.");
+        Console.WriteLine("6. Показать арендованные фильмы.");
+        Console.WriteLine("7. Выйти");
         Console.Write("Выберите действие: ");
     }
 

@@ -31,8 +31,14 @@ internal abstract class Program
                 case "4":
                     CreateRental(cinemaService, filmService, rentService);
                     break;
-
                 case "5":
+                    DisplayAllFilms(filmService);
+                    break;
+                case "6":
+                    DisplayRentFilms(rentService);
+                    break;
+
+                case "7":
 
                     running = false;
 
@@ -147,6 +153,28 @@ internal abstract class Program
             }
             else
                 Console2.DisplayMessage("Неверный номер кинотеатра.");
+        }
+        
+        static void DisplayAllFilms(IFilmService filmService)
+        {
+            Console2.DisplayFilms(filmService.GetFilms());
+        }
+        
+        static void DisplayRentFilms(IRentService rentService)
+        {
+            var rents = rentService.GetRents();
+            Console.WriteLine("\nСписок арендованных фильмов:");
+            if (rents.Count == 0)
+            {
+                Console.WriteLine("Нет арендованных фильмов.");
+            }
+            else
+            {
+                foreach (var rent in rents)
+                {
+                    Console.WriteLine($"Фильм: {rent.Film.Name}, Кинотеатр: {rent.Cinema.Name}, Даты: {rent.StartDate.ToShortDateString()} - {rent.EndDate.ToShortDateString()}");
+                }
+            }
         }
     }
 }        

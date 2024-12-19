@@ -1,6 +1,6 @@
 namespace Course_3sem;
 
-public class Cinema
+public class Cinema : IBank
 {
     private string _name;
     private string _address;
@@ -60,7 +60,7 @@ public class Cinema
         set => _bankAccount = value;
     }
 
-    public string InnCinema
+    public string Inn
     {
         get => _innCinema;
         set => _innCinema = value;
@@ -76,6 +76,12 @@ public class Cinema
         Owner = owner;
         BankName = bankName;
         BankAccount = bankAccount;
-        InnCinema = innCinema;
+        Inn = innCinema;
+    }
+    
+    public string GetBankDetails()
+    {
+        return $"Банк: {BankName}, Счет: {BankAccount}, ИНН: {Inn} ";
     }
 }
+

@@ -77,7 +77,7 @@ internal abstract class Program
                 Film film = new Film(title, category, screenwriter, director, producerCompany, releaseYear,
                     purchaseCost, selectedVendor);
                 filmService.AddFilm(film);
-                supplierService.AddFilmToVendor(selectedVendor, film);
+                vendorService.AddFilmToVendor(selectedVendor, film);
                 Console2.DisplayMessage($"Фильм '{title}' добавлен.");
             }
             else
@@ -161,7 +161,7 @@ internal abstract class Program
         }
         
         static void DisplayRentFilms(IRentService rentService)
-        {
+        {   
             var rents = rentService.GetRents();
             Console.WriteLine("\nСписок арендованных фильмов:");
             if (rents.Count == 0)

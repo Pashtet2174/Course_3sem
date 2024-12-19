@@ -51,14 +51,12 @@ public class Console2
                 Console.WriteLine($"Стоимость: {film.Cost}");
                 Console.WriteLine($"Поставщик: {film.Vendor.Name}");
                 Console.WriteLine($"Юридический адрес поставщика: {film.Vendor.LegalAddress}");
-                Console.WriteLine($"Банк поставщика: {film.Vendor.Bank}");
-                Console.WriteLine($"Счет поставщика: {film.Vendor.BankAccountNumber}");
-                Console.WriteLine($"ИНН поставщика: {film.Vendor.INN}");
+                Console.WriteLine(film.Vendor.GetBankDetails());
                 Console.WriteLine(new string('-', 40));
             }
         }
     }
-
+    
     public static void DisplayVendors(List<Vendor> vendors)
     {
         Console.WriteLine("\nСписок поставщиков:");

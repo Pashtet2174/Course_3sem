@@ -1,6 +1,6 @@
 namespace Course_3sem;
 
-public class Vendor
+public class Vendor: IBank
 {
     private string _name;
     private string _legalAddress;
@@ -21,19 +21,19 @@ public class Vendor
         set => _legalAddress = value;
     }
 
-    public string Bank
+    public string BankName
     {
         get => _bank;
         set => _bank = value;
     }
 
-    public string BankAccountNumber
+    public string BankAccount
     {
         get => _bankAccountNumber;
         set => _bankAccountNumber = value;
     }
 
-    public string INN
+    public string Inn
     {
         get => _inn;
         set => _inn = value;
@@ -53,9 +53,9 @@ public class Vendor
     {
         Name = name;
         LegalAddress = legalAddress;
-        Bank = bank;
-        BankAccountNumber = bankAccountNumber;
-        INN = inn;
+        BankName = bank;
+        BankAccount = bankAccountNumber;
+        Inn = inn;
         Films = new List<Film>();
 
     }
@@ -63,5 +63,10 @@ public class Vendor
     public void AddFilm(Film film)
     {
         Films.Add(film);;
+    }
+
+    public string GetBankDetails()
+    {
+        return $"Банк: {BankName}\nСчет: {BankAccount}\nИНН: {Inn}";
     }
 }

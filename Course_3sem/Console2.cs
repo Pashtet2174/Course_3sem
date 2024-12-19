@@ -33,16 +33,28 @@ public class Console2
 
     public static void DisplayFilms(List<Film> films)
     {
-        Console.WriteLine("\nСписок фильмов:");
+        Console.WriteLine("\nСписок всех фильмов:");
         if (films.Count == 0)
         {
-            Console.WriteLine("Нет добавленных фильмов.");
+            Console.WriteLine("Фильмы отсутствуют.");
         }
         else
         {
-            for (int i = 0; i < films.Count; i++)
+            foreach (var film in films)
             {
-                Console.WriteLine($"{i + 1}. {films[i].Name}");
+                Console.WriteLine($"Название: {film.Name}");
+                Console.WriteLine($"Категория: {film.Category}");
+                Console.WriteLine($"Автор сценария: {film.Scriptwriter}");
+                Console.WriteLine($"Режиссер: {film.ProductionDirector}");
+                Console.WriteLine($"Компания-производитель: {film.ProductionCompany}");
+                Console.WriteLine($"Год выпуска: {film.ReleaseYear}");
+                Console.WriteLine($"Стоимость: {film.Cost}");
+                Console.WriteLine($"Поставщик: {film.Vendor.Name}");
+                Console.WriteLine($"Юридический адрес поставщика: {film.Vendor.LegalAddress}");
+                Console.WriteLine($"Банк поставщика: {film.Vendor.Bank}");
+                Console.WriteLine($"Счет поставщика: {film.Vendor.BankAccountNumber}");
+                Console.WriteLine($"ИНН поставщика: {film.Vendor.INN}");
+                Console.WriteLine(new string('-', 40));
             }
         }
     }

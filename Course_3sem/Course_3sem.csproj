@@ -7,4 +7,40 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <Compile Update="VendorService.cs">
+        <DependentUpon>Vendor.cs</DependentUpon>
+      </Compile>
+      <Compile Update="IVendorService.cs">
+        <DependentUpon>Vendor.cs</DependentUpon>
+      </Compile>
+      <Compile Update="IRentService.cs">
+        <DependentUpon>Rent.cs</DependentUpon>
+      </Compile>
+      <Compile Update="RentService.cs">
+        <DependentUpon>Rent.cs</DependentUpon>
+      </Compile>
+      <Compile Update="CinemaService.cs">
+        <DependentUpon>Cinema.cs</DependentUpon>
+      </Compile>
+      <Compile Update="ICinemaService.cs">
+        <DependentUpon>Cinema.cs</DependentUpon>
+      </Compile>
+      <Compile Update="FilmService.cs">
+        <DependentUpon>Film.cs</DependentUpon>
+      </Compile>
+      <Compile Update="IFilmService.cs">
+        <DependentUpon>Film.cs</DependentUpon>
+      </Compile>
+      <Compile Update="OutdoorCinema.cs">
+        <DependentUpon>Cinema.cs</DependentUpon>
+      </Compile>
+      <Compile Update="FourDCinema.cs">
+        <DependentUpon>Cinema.cs</DependentUpon>
+      </Compile>
+      <Compile Update="TraditionalCinema.cs">
+        <DependentUpon>Cinema.cs</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
 </Project>

@@ -2,7 +2,7 @@ namespace Course_3sem;
 
 public class RentService : IRentService
 {
-    private readonly List<Rent> _rents = new();
+    private readonly List<Rent> _rents = new ();
     
     public void AddRent(Rent rent)
     {

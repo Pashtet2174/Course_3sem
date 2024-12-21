@@ -26,10 +26,10 @@ internal abstract class Program
                     AddCinema(cinemaService);
                     break;
                 case "3":
-                    AddSupplier(vendorService);
+                    AddVendor(vendorService);
                     break;
                 case "4":
-                    CreateRental(cinemaService, filmService, rentService);
+                    CreateRent(cinemaService, filmService, rentService);
                     break;
                 case "5":
                     DisplayAllFilms(filmService);
@@ -57,7 +57,7 @@ internal abstract class Program
         }
 
 
-        void AddFilm(IFilmService filmService, IVendorService supplierService)
+        static void AddFilm(IFilmService filmService, IVendorService vendorService)
         {
             string title = Console2.GetUserInput("Введите название фильма: ");
             string category = Console2.GetUserInput("Введите категорию фильма: ");
@@ -88,22 +88,48 @@ internal abstract class Program
 
         static void AddCinema(ICinemaService cinemaService)
         {
+            Console.WriteLine("Выберите тип кинотеатра:");
+            Console.WriteLine("1. Под открытым небом");
+            Console.WriteLine("2. 4D кинотеатр");
+            Console.WriteLine("3. Традиционный кинотеатр");
+
+            string cinemaType = Console.ReadLine();
+            Cinema cinema = null;
+
             string name = Console2.GetUserInput("Введите название кинотеатра: ");
             string address = Console2.GetUserInput("Введите адрес кинотеатра: ");
             string phone = Console2.GetUserInput("Введите телефон кинотеатра: ");
             int seatCount = int.Parse(Console2.GetUserInput("Введите количество посадочных мест: "));
-            string director = Console2.GetUserInput("Введите имя директора кинотеатра: ");
-            string owner = Console2.GetUserInput("Введите имя владельца кинотеатра: ");
+            string owner = Console2.GetUserInput("Введите владельца кинотеатра: ");
+            string director =Console2.GetUserInput("Введите директора кинотеатра: ");
             string bank = Console2.GetUserInput("Введите название банка кинотеатра: ");
             string bankAccount = Console2.GetUserInput("Введите номер счета кинотеатра: ");
             string inn = Console2.GetUserInput("Введите ИНН кинотеатра: ");
 
-            Cinema cinema = new Cinema(name, address, phone, seatCount, director, owner, bank, bankAccount, inn);
+            switch (cinemaType)
+            {
+                case "1":
+                    int parcingCapacity = int.Parse(Console2.GetUserInput("Введите количество парковочных мест:"));
+                    cinema = new OutdoorCinema(name, address, phone, seatCount, director, owner, bank, bankAccount, inn, parcingCapacity);
+                    break;
+                case "2":
+                    string seatsWithEffects = Console2.GetUserInput("Нужны ли сиденья с эффектами? (Да/Нет): ");
+                    cinema = new FourDCinema(name, address, phone, seatCount, director, owner, bank, bankAccount, inn, seatsWithEffects);
+                    break;
+                case "3":
+                    string screenType = Console2.GetUserInput("Введите тип экрана:");
+                    cinema = new TraditionalCinema(name, address, phone, seatCount, director, owner, bank, bankAccount, inn, screenType);
+                    break;
+                default:
+                    Console2.DisplayMessage("Неверный выбор.");
+                    return;
+            }
+
             cinemaService.AddCinema(cinema);
             Console2.DisplayMessage($"Кинотеатр '{name}' добавлен.");
         }
 
-        static void AddSupplier(IVendorService supplierService)
+        static void AddVendor(IVendorService supplierService)
         {
             string name = Console2.GetUserInput("Введите название поставщика: ");
             string legalAddress = Console2.GetUserInput("Введите юридический адрес поставщика: ");
@@ -116,7 +142,7 @@ internal abstract class Program
             Console2.DisplayMessage($"Поставщик '{name}' добавлен.");
         }
 
-        static void CreateRental(ICinemaService cinemaService, IFilmService filmService, IRentService rentalService)
+        static void CreateRent(ICinemaService cinemaService, IFilmService filmService, IRentService rentalService)
         {
             Console2.DisplayCinemas(cinemaService.GetCinemas());
             int cinemaIndex = int.Parse(Console2.GetUserInput("Выберите кинотеатр по номеру: ")) - 1;
@@ -139,9 +165,9 @@ internal abstract class Program
                     DateTime endDate =
                         DateTime.Parse(Console2.GetUserInput("Введите дату конца аренды (например, 2024-12-18): "));
                     decimal rentalPrice = decimal.Parse(Console2.GetUserInput("Введите цену аренды: "));
-                    decimal lateFee = decimal.Parse(Console2.GetUserInput("Введите штраф за просрочку: "));
+                    decimal penalty = decimal.Parse(Console2.GetUserInput("Введите штраф за просрочку: "));
 
-                    Rent rent = new Rent(selectedCinema, selectedFilm, startDate, endDate, rentalPrice, lateFee);
+                    Rent rent = new Rent(selectedCinema, selectedFilm, startDate, endDate, rentalPrice, penalty);
                     rentalService.AddRent(rent);
                     Console2.DisplayMessage(
                         $"Аренда фильма '{selectedFilm.Name}' в кинотеатре '{selectedCinema.Name}' создана.");
